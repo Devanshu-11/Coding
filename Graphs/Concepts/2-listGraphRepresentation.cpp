@@ -1,28 +1,34 @@
 #include <iostream>
+#include<vector>
 using namespace std;
 int main(){
     int n,m;
     cin>>n>>m;
-    vector<vector<int>>adj(n+1,vector<int>(n+1,0));
+    
+    // in this,instead of store in 2D array, we stored in list and stores the adjacent neighbours
+    vector<int>adj[n+1];
     
     for(int i=0;i<m;i++){
         int u,v;
         cin>>u>>v;
         
-        adj[u][v]=1;
-        adj[v][u]=1;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
     }
     
     for(int i=0;i<=n;i++){
-        for(int j=0;j<=n;j++){
-            cout<<adj[i][j]<<" ";
+        cout<<i<<"-> ";
+        
+        for(auto it:adj[i]){
+            cout<<it<<" ";
         }
         cout<<endl;
     }
+    
 }
 
-// TC- O(n^2)
-// SC- O(n^2);
+// TC- O(n+2E)
+// SC- O(n+2*E);
 
 // undirected graph
 // 1-2 
